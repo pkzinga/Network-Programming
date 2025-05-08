@@ -24,7 +24,7 @@ class Webrowser(QWidget):
         self.image.raise_()
 
         self.search = QLineEdit()
-        self.search.setPlaceholderText("search here or input url e.g localhost:8088/")
+        self.search.setPlaceholderText("search here or input url to connect to local server specify path as follows localhost:8088/")
         self.setGeometry(100,100,600,500)
 
         self.back_button = QPushButton("Go Back")
@@ -33,7 +33,7 @@ class Webrowser(QWidget):
         self.search_btn = QPushButton("Click Me to search")
         self.search_btn.clicked.connect(self.load_url)
 
-        self.reload_btn = QPushButton(reload)
+        self.reload_btn = QPushButton("reload")
         self.reload_btn.clicked.connect(self.re_load)
         
         self.forward_button = QPushButton("Go Forward")
