@@ -32,7 +32,9 @@ class Webrowser(QWidget):
 
         self.search_btn = QPushButton("Click Me to search")
         self.search_btn.clicked.connect(self.load_url)
-        
+
+        self.reload_btn = QPushButton(reload)
+        self.reload_btn.clicked.connect(self.re_load)
         
         self.forward_button = QPushButton("Go Forward")
         self.forward_button.clicked.connect(self.go_forward)
@@ -45,16 +47,20 @@ class Webrowser(QWidget):
         self.Search_layout.addWidget(self.back_button)
         self.Search_layout.addWidget(self.forward_button)
         self.Search_layout.addWidget(self.search)
-
-
-
-
-    
-
+        self.Search_layout.addWidget(self.search_btn)
+        self.Search_layout.addWidget(self.reload_btn)
 
 
         self.layout.addWidget(self.image)
-        self.layout.addLayout(self.searh_layout)
+        self.layout.addLayout(self.Search_layout)
+    
+        
+        self.browser = QWebEngineView()
+        self.layout.addWidget(self.browser)
+       
+
+    def re_load(self):
+          self.browser.reload()
 
     def go_back(self):
             self.browser.back()
@@ -92,5 +98,5 @@ def main():
     browser.show()
     sys.exit(app.exec_())
 
-if __name__ == "__main_-":
+if __name__ == "__main__":
     main()
