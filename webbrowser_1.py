@@ -11,6 +11,7 @@ Path_Icon =  Path(__file__).parent / "kuthu.jpg"
 class Webrowser(QWidget):
     def __init__(self):
         super().__init__()
+
         self.setWindowTitle("Kuthu Search Browser")
         self.setWindowIcon(QIcon(QPixmap(str(Path_Icon))))
         self.setGeometry(200,200,1000,700)
@@ -40,10 +41,10 @@ class Webrowser(QWidget):
 
         self.layout = QVBoxLayout()
         self.setLayout(self.layout)
-        self.searh_layout = QHBoxLayout()
+        self.Search_layout = QHBoxLayout()
         self.Search_layout.addWidget(self.back_button)
         self.Search_layout.addWidget(self.forward_button)
-        self.searh_layout.addWidget(self.search)
+        self.Search_layout.addWidget(self.search)
 
 
 
@@ -61,6 +62,28 @@ class Webrowser(QWidget):
     def go_forward(self):
             self.browser.forward()
 
+    def load_url(self):
+            url = self.search.text()
+            self.current_url = url            
+            if not url:
+                  return           
+            if not url.startswith("http://") and not url.startswith("https://"):
+                url = "http://" + url
+
+            url_local = "http://localhost:8088/"
+
+            if url in (f"{url_local}",f"{url_local}register"):
+                self.browser.load(QUrl(url))
+            else:
+                self.error_html()
+
+    def error_html(self):
+            error = f"""
+                    <html><body>
+                    <h2>No local results for query "{self.current_url}"</h2>
+                    <p><a href="https://www.google.com/search?q={self.current_url}">search on Google</a></p>
+                    </body></html> """
+            self.browser.setHtml(error)
 
 
 def main():
