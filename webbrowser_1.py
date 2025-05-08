@@ -15,14 +15,28 @@ class Webrowser(QWidget):
         self.setWindowIcon(QIcon(QPixmap(str(Path_Icon))))
         self.setGeometry(200,200,1000,700)
 
+        self.image =QLabel()
+        pixmap = QPixmap(str(Path_Icon))
+        self.image.setPixmap(pixmap)
+        self.image.setAlignment(Qt.AlignCenter)
+        self.image.setFixedSize(1000,100)
+        self.image.raise_()
+
+        self.search = QLineEdit()
+        self.search.setPlaceholderText("search here or input url e.g localhost:8088/")
+        self.setGeometry(100,100,600,500)
+
 
 
         self.layout = QVBoxLayout()
         self.setLayout(self.layout)
+        self.searh_layout = QHBoxLayout()
+        self.searh_layout.addWidget(self.search)
 
 
 
-
+        self.layout.addWidget(self.image)
+        self.layout.addLayout(self.searh_layout)
 
 
 def main():
