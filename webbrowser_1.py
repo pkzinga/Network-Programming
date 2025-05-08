@@ -26,21 +26,47 @@ class Webrowser(QWidget):
         self.search.setPlaceholderText("search here or input url e.g localhost:8088/")
         self.setGeometry(100,100,600,500)
 
+        self.back_button = QPushButton("Go Back")
+        self.back_button.clicked.connect(self.go_back)
+
+        self.search_btn = QPushButton("Click Me to search")
+        self.search_btn.clicked.connect(self.load_url)
+        
+        
+        self.forward_button = QPushButton("Go Forward")
+        self.forward_button.clicked.connect(self.go_forward)
+        
 
 
         self.layout = QVBoxLayout()
         self.setLayout(self.layout)
         self.searh_layout = QHBoxLayout()
+        self.Search_layout.addWidget(self.back_button)
+        self.Search_layout.addWidget(self.forward_button)
         self.searh_layout.addWidget(self.search)
+
+
+
+
+    
 
 
 
         self.layout.addWidget(self.image)
         self.layout.addLayout(self.searh_layout)
 
+    def go_back(self):
+            self.browser.back()
+
+    def go_forward(self):
+            self.browser.forward()
+
+
 
 def main():
     app = QApplication(sys.argv)
+    browser = Webrowser()
+    browser.show()
     sys.exit(app.exec_())
 
 if __name__ == "__main_-":
